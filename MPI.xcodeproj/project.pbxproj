@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		384415DE20C570A3003B1E56 /* Automate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384415DC20C570A3003B1E56 /* Automate.cpp */; };
+		384415E120C572EC003B1E56 /* Etat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 384415DF20C572EC003B1E56 /* Etat.cpp */; };
 		873D628B20C56F4B00FE5549 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 873D628A20C56F4B00FE5549 /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -23,6 +25,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		384415DC20C570A3003B1E56 /* Automate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Automate.cpp; sourceTree = "<group>"; };
+		384415DD20C570A3003B1E56 /* Automate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Automate.h; sourceTree = "<group>"; };
+		384415DF20C572EC003B1E56 /* Etat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Etat.cpp; sourceTree = "<group>"; };
+		384415E020C572EC003B1E56 /* Etat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Etat.h; sourceTree = "<group>"; };
 		873D628720C56F4B00FE5549 /* MPI */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MPI; sourceTree = BUILT_PRODUCTS_DIR; };
 		873D628A20C56F4B00FE5549 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +64,10 @@
 			isa = PBXGroup;
 			children = (
 				873D628A20C56F4B00FE5549 /* main.cpp */,
+				384415DD20C570A3003B1E56 /* Automate.h */,
+				384415DC20C570A3003B1E56 /* Automate.cpp */,
+				384415DF20C572EC003B1E56 /* Etat.cpp */,
+				384415E020C572EC003B1E56 /* Etat.h */,
 			);
 			path = MPI;
 			sourceTree = "<group>";
@@ -88,7 +98,7 @@
 		873D627F20C56F4B00FE5549 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = Maxence;
 				TargetAttributes = {
 					873D628620C56F4B00FE5549 = {
@@ -119,7 +129,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				384415E120C572EC003B1E56 /* Etat.cpp in Sources */,
 				873D628B20C56F4B00FE5549 /* main.cpp in Sources */,
+				384415DE20C570A3003B1E56 /* Automate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,6 +152,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -147,6 +160,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -195,6 +209,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -202,6 +217,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -233,7 +249,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MN37JNJLL;
+				DEVELOPMENT_TEAM = X9UAR68B43;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -242,7 +258,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8MN37JNJLL;
+				DEVELOPMENT_TEAM = X9UAR68B43;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
