@@ -28,11 +28,16 @@ class Automate
     void            afficher();
 	
 	
-	bool			est_asynchrone();
-	bool			est_deterministe();
-	bool			est_complet();
+	bool			est_un_automate_asynchrone();
+	bool			est_un_automate_deterministe();
+	bool			est_un_automate_complet();
 	void			completion();
-	
+    
+    void            determination_et_completion();
+    void            determination_et_completion_automate_asynchrone();
+	void            determination_et_completion_automate_synchrone();
+    
+    
     /*
      **  GETTEURS & SETTEURS
      */

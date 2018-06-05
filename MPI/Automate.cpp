@@ -9,33 +9,31 @@ Automate::Automate() {
 
 // on note * les transitions epsilons
 
-bool Automate::est_asynchrone() {
+bool Automate::est_un_automate_asynchrone() {
     
     vector<string> row; // Žtats
-    
+        
     for(int unsigned i=0; i<_nb_etats; i++) {
         row = Ttable[i];
         
         for(int j=0; j<_nb_symboles; j++) {
             
-            if(row[j+2].compare("*") > 0) {
-                cout << "Cet automate est asynchrone" << endl;
+            if(row[j+2] == "*") {
                 return true;
             }
         }
     }
-    cout << "Cet automate est synchrone" << endl;
     return false;
 }
 
 
-bool Automate::est_deterministe()
+bool Automate::est_un_automate_deterministe()
 {
     
     vector<string> row; // Žtats
     
     if(_nb_etats_initiaux != 1) {
-        return true;
+        return false;
     }
     
     for(int unsigned i=0; i<Ttable.size(); i++) {
@@ -47,15 +45,15 @@ bool Automate::est_deterministe()
             string label = row[j+2];
             
             if(label.find(",") != string::npos) {
-                return true;
+                return false;
             }
         }
     }
-    return false;
+    return true;
 }
 
 
-bool Automate::est_complet()
+bool Automate::est_un_automate_complet()
 {
     vector<string> row; // Žtats
     
@@ -69,8 +67,9 @@ bool Automate::est_complet()
             
             int count = 0;
             
-            for (int n = 0; i < label.size(); n++)
-                if (label[n] == ',') count++;
+            for(auto c : label) {
+                if (c == ',') count++;
+            }
             
             if (count == _nb_symboles - 1) {
                 return true;
@@ -88,12 +87,13 @@ void Automate::completion() {
     for(int unsigned i=0; i<Ttable.size(); i++) {
         
         row = Ttable[i];
-
+        
         for(int j=0; j<_nb_symboles; j++) {
             
             string label = row[j+2];
             
             if(label.find("-") != string::npos) {
+                Ttable[i][j+2] = "P";
             }
         }
     }
@@ -104,6 +104,62 @@ void Automate::completion() {
     
     for (int i = 0; i<_nb_symboles; i++) {
         row_P.push_back("P");
+    }
+    Ttable.push_back(row_P);
+}
+
+
+
+void Automate::determination_et_completion_automate_synchrone() {
+    
+    vector<vector<string>> nouvel_automate;
+    
+    vector<int> etats_initiaux;
+    
+    vector<string> nouvel_etat_initial;
+
+    
+    for (int i=0; i<_nb_etats; i++) {
+        
+        if (Ttable[i][0] == "ES" || Ttable[i][0] == "E") {
+
+            if (nouvel_etat_initial.empty()) {
+                nouvel_etat_initial = Ttable[i];
+            } else {
+                nouvel_etat_initial[1] = nouvel_etat_initial[1] + "," + Ttable[i][1];
+                
+                for(int j=0; j<_nb_symboles; j++) {
+                    nouvel_etat_initial[j] = nouvel_etat_initial[j] + "," + Ttable[i][j];
+                }
+            }
+            
+            if (Ttable[i][0] == "ES")
+                nouvel_etat_initial[0] = "ES";
+        }
+    }
+
+    for (int i = 0; i<nouvel_etat_initial.size(); i++) {
+        
+        cout << nouvel_etat_initial[i] << endl;
+    }
+}
+
+
+
+void Automate::determination_et_completion_automate_asynchrone() {
+    
+}
+
+void Automate::determination_et_completion() {
+    
+    if (est_un_automate_deterministe()) {
+        cout << "Cet automate est deja deterministe !" << endl;
+    } else {
+        if (est_un_automate_asynchrone()) {
+            determination_et_completion_automate_asynchrone();
+        } else {
+            determination_et_completion_automate_synchrone();
+        }
     }
 }
 

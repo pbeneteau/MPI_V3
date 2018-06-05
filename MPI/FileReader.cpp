@@ -21,7 +21,7 @@ void    Automate::lecture_fichier(string chemin)
 	ifstream file(chemin, ios::in); // Ouverture du fichier en lecture
 	if (!file)
 	{
-		cout << "Erreur lors de la lecture du fichier !" << endl;
+		cout << "Erreur lors de la lecture du fichier ! Le ficher n'existe pas." << endl;
 		file.close();
 		exit(1);
 	}
