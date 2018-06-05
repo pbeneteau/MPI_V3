@@ -124,11 +124,11 @@ void	Automate::set_Ttable(string line)
 	
 	// si src existe déja, on rajoute juste une nouvelle dest
 	
-	bool alreadyIn = false;
+	bool alreadyInSrc = false;
 	for (int i = 0; i < Ttable.size(); i++)
 	{
 		if (Ttable[i][1] == src) {
-			alreadyIn = true;
+			alreadyInSrc = true;
 			if (Ttable[i][labelPos+2] == "-")
 				Ttable[i][labelPos+2] = dest;
 			else
@@ -137,7 +137,7 @@ void	Automate::set_Ttable(string line)
 		}
 	}
 	//sinon
-	if (alreadyIn == false) {
+	if (alreadyInSrc == false) {
 		vector<string> row;
 		
 		row.push_back("N/A"); //type
@@ -149,6 +149,26 @@ void	Automate::set_Ttable(string line)
 				row.push_back(dest);
 			else
 				row.push_back("-");
+		}
+		Ttable.push_back(row);
+	}
+	
+	bool alreadyInDest = false;
+	for (int i = 0; i < Ttable.size(); i++)
+	{
+		if (Ttable[i][1] == dest)
+			alreadyInDest = true;
+	}
+	
+	if (alreadyInDest == false) {
+		vector<string> row;
+		
+		row.push_back("N/A"); //type
+		row.push_back(dest); // nom
+		
+		for(int j = 0; j < _nb_symboles; j++)
+		{
+			row.push_back("-");
 		}
 		Ttable.push_back(row);
 	}
