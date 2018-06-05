@@ -17,4 +17,6 @@ int main()
 
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;
+	
+	AF.afficher();
 }

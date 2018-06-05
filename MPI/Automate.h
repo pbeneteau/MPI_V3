@@ -18,8 +18,10 @@ class Automate
 	string			initiaux;
 	string			terminaux;
 	
-	vector<vector<string>> Ttable;
-	vector<string> labelOrder;
+	vector<vector<string>>	Ttable;
+	vector<string>			labelOrder;
+	vector<string>			E;
+	vector<string>			S;
 	
     public :
     void            lecture_fichier(string chemin);
@@ -45,6 +47,10 @@ class Automate
     void            set_nb_transitions(string ligne);
     void            set_etats_initiaux(string ligne);
     void            set_etats_terminaux(string ligne);
+	void			handle_ES(string ligne, vector<string> &ES);
+	
+	void			handle_initiaux(string ligne);
+	void			handle_terminaux(string ligne);
 	
 };
 

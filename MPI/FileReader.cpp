@@ -88,21 +88,9 @@ void    Automate::lecture_fichier(string chemin)
 		cout << "0 transitions dans le file" << endl;
 		exit(1);
 	}
-	//initTtable();
-	
-	cout << _nb_symboles << endl;
-	cout << _nb_etats << endl;
-	cout << initiaux << endl;
-	cout << terminaux << endl;
-	cout << _nb_transitions << endl;
-	
+
 	while (getline(file, line))
 	{
 		set_Ttable(line);
-	}
-	afficher();
-	
-	for (int i = 0; i < labelOrder.size(); i++) {
-		cout << labelOrder[i] << endl;
 	}
 }
