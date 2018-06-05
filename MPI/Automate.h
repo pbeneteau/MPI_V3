@@ -48,6 +48,7 @@ class Automate
     void            set_etats_initiaux(string ligne);
     void            set_etats_terminaux(string ligne);
 	void			handle_ES(string ligne, vector<string> &ES);
+	void			set_ES();
 	
 	void			handle_initiaux(string ligne);
 	void			handle_terminaux(string ligne);

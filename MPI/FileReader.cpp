@@ -93,4 +93,5 @@ void    Automate::lecture_fichier(string chemin)
 	{
 		set_Ttable(line);
 	}
+	set_ES();
 }
