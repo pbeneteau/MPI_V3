@@ -1,15 +1,20 @@
-//
-//  main.cpp
-//  MPI
-//
-//  Created by Maxence on 04/06/2018.
-//  Copyright © 2018 Maxence. All rights reserved.
-//
-
 #include <iostream>
+#include <cstdlib>
+#include "Automate.h"
 
-int main(int argc, const char * argv[]) {
-	// insert code here...
-	std::cout << "Hello, World!\n";
-	return 0;
+using namespace std;
+
+/*
+/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt
+*/
+int main()
+{
+	string chemin;
+	Automate    AF;
+	
+	cout << "Siaisr le numero du fichier : " << endl;
+	cin >> chemin;
+
+	AF.lecture_fichier(chemin);
+	cout << "Lecture du fichier : OK !" << endl;
 }

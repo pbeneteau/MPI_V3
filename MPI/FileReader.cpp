@@ -14,14 +14,14 @@
 
 using namespace std;
 
-void    Automate::lecture_file(char *chemin)
+void    Automate::lecture_fichier(string chemin)
 {
 	string      line;
 	
 	ifstream file(chemin, ios::in); // Ouverture du fichier en lecture
 	if (!file)
 	{
-		cout << "Erreur lors de la du file !" << endl;
+		cout << "Erreur lors de la lecture du fichier !" << endl;
 		file.close();
 		exit(1);
 	}
@@ -48,7 +48,7 @@ void    Automate::lecture_file(char *chemin)
 		cout << "Erreur lors de la lecture du fichier ! " << endl;
 		exit(1);
 	}
-	set_etats(line);
+	set_nb_etats(line);
 	if (_nb_etats == 0)
 	{
 		cout << "0 etats dans le fichier" << endl;
@@ -88,8 +88,21 @@ void    Automate::lecture_file(char *chemin)
 		cout << "0 transitions dans le file" << endl;
 		exit(1);
 	}
+	//initTtable();
+	
+	cout << _nb_symboles << endl;
+	cout << _nb_etats << endl;
+	cout << initiaux << endl;
+	cout << terminaux << endl;
+	cout << _nb_transitions << endl;
+	
 	while (getline(file, line))
 	{
-		set_transitions(line);
+		set_Ttable(line);
+	}
+	afficher();
+	
+	for (int i = 0; i < labelOrder.size(); i++) {
+		cout << labelOrder[i] << endl;
 	}
 }
