@@ -21,12 +21,20 @@ void    Automate::set_etats_initiaux(string ligne)
 {
 	handle_ES(ligne, E);
 	_nb_etats_initiaux = atoi(E[0].c_str());
+	for (int i = 0; i < E.size(); i++)
+	{
+		cout << "oui" << E[i] << endl;
+	}
 }
 
 void    Automate::set_etats_terminaux(string ligne)
 {
 	handle_ES(ligne, S);
 	_nb_etats_terminaux = atoi(S[0].c_str());
+	for (int i = 0; i < S.size(); i++)
+	{
+		cout << "non" << S[i] << endl;
+	}
 }
 
 void	Automate::handle_ES(string ligne, vector<string> &EStab)
@@ -41,7 +49,9 @@ void	Automate::handle_ES(string ligne, vector<string> &EStab)
 		pos = ligne.find(" ", initialPos);
 	}
 	// Add the last one
-	EStab.push_back(ligne.substr(initialPos, min(pos, ligne.size()) - initialPos + 1));
+	//cout << "AL :" << ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1).size() << endl;
+	EStab.push_back(ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1));
+	//EStab.push_back(ligne.substr(initialPos, ligne.size() - initialPos - 1)); //OUI ?
 
 }
 
@@ -60,7 +70,7 @@ void 	Automate::afficher() {
 	}
 	cout << "Nombre d'etats terminaux : " << _nb_etats_terminaux << endl;
 	cout << "Liste des etats terminaux S : ";
-	for (int i = 1; i < E.size(); i++)
+	for (int i = 1; i < S.size(); i++)
 	{
 		cout << S[i] << " ";
 	}
@@ -142,5 +152,30 @@ void	Automate::set_Ttable(string line)
 		}
 		Ttable.push_back(row);
 	}
-	
+}
+
+void	Automate::set_ES()
+{
+	bool isE = false;
+	bool isS = false;
+
+	for (int i = 0; i < Ttable.size(); i++)
+	{
+		for (int j = 1; j < max(E.size(), S.size()); j++)
+		{
+			if (j < E.size() && Ttable[i][1] == E[j])
+				isE = true;
+			if (j < S.size() && Ttable[i][1] == S[j])
+				isS = true;
+
+			if (isE == true && isS == true)
+				Ttable[i][0] = "ES";
+			if (isE == true)
+				Ttable[i][0] = "E";
+			if (isS == true)
+				Ttable[i][0] = "S";
+			isS = false;
+			isE = false;
+		}
+	}
 }
