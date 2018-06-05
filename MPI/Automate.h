@@ -13,6 +13,8 @@ class Automate
     int             _nb_symboles;
     int             _nb_etats;
 	int             _nb_transitions;
+	int				_nb_etats_initiaux;
+	int 			_nb_etats_terminaux;
 	string			initiaux;
 	string			terminaux;
 	
@@ -24,13 +26,16 @@ class Automate
     void            afficher();
 	
 	
+	bool			est_asynchrone();
+	bool			est_deterministe();
+	bool			est_complet();
+	void			completion();
+	
     /*
      **  GETTEURS & SETTEURS
      */
 	
     Automate();
-    Automate(int nb_etats);
-	
 	
 	void			initTtable();
 	void			set_Ttable(string line);

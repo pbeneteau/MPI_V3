@@ -2,11 +2,6 @@
 #include <cstdlib>
 #include "Automate.h"
 
-Automate::Automate(int nb_etats) : _nb_etats(nb_etats){
-}
-Automate::Automate(){
-}
-
 void    Automate::set_nb_symboles(string ligne)
 {
 	_nb_symboles = atoi(ligne.c_str());
@@ -27,8 +22,24 @@ void    Automate::set_etats_initiaux(string ligne)
 	initiaux = ligne;
 }
 
-void 	Automate::afficher() {
+void    Automate::set_etats_terminaux(string ligne)
+{
+	terminaux = ligne;
+}
 
+void 	Automate::afficher() {
+	
+	cout << "Automate : " << endl;
+	
+	cout << "Nombre de symboles : " << _nb_symboles << endl;
+	cout << "Nombre d'etats : " << _nb_etats << endl;
+	cout << "Nombre de transitions : " << _nb_transitions << endl;
+	cout << "Liste des etats initiaux : ";
+	
+	cout << "Table de verite : \n" << endl;
+	
+	cout << endl;
+	
 	for (int i = 0; i < Ttable.size(); i++)
 	{
 		for (int j = 0; j < Ttable[i].size(); j++)
@@ -38,11 +49,6 @@ void 	Automate::afficher() {
 		}
 		cout << endl;
 	}
-}
-
-void    Automate::set_etats_terminaux(string ligne)
-{
-	terminaux = ligne;
 }
 
 void	Automate::set_Ttable(string line)
@@ -69,10 +75,10 @@ void	Automate::set_Ttable(string line)
 			dest.push_back(c);
 	}
 	
-/*	cout << "src: " << src << endl;
-	cout << "label: " << label << endl;
-	cout << "dest: " << dest << endl;
-*/
+	/*	cout << "src: " << src << endl;
+	 cout << "label: " << label << endl;
+	 cout << "dest: " << dest << endl;
+	 */
 	if(find(labelOrder.begin(), labelOrder.end(), label) != labelOrder.end()) {
 		/* v contains x */
 	} else {
@@ -113,5 +119,3 @@ void	Automate::set_Ttable(string line)
 	}
 	
 }
-
-

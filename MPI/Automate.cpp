@@ -1,37 +1,10 @@
 #include <iostream>
 #include <algorithm>
 #include "Automate.h"
-#include "VariadicTable.hpp"
-
 
 using namespace std;
 
-
 Automate::Automate() {
-}
-
-
-void Automate::afficher() {
-    
-    cout << "Automate : " << endl;
-    
-    cout << "Nombre de symboles : " << _nb_symboles << endl;
-    cout << "Nombre d'etats : " << _nb_etats << endl;
-    cout << "Nombre de transitions : " << _nb_transitions << endl;
-    cout << "Liste des etats initiaux : ";
-    
-    cout << "Table de verite : \n" << endl;
-    
-    cout << endl;
-    
-    for(int i=0; i<_nb_etats; i++) {
-        
-        for(int j=0; j<_nb_symboles; j++) {
-            
-            cout << Ttable[i][j] << "    ";
-        }
-        cout << endl;
-    }
 }
 
 // on note * les transitions epsilons
