@@ -129,18 +129,16 @@ void Automate::determination_et_completion_automate_synchrone() {
                 nouvel_etat_initial[1] = nouvel_etat_initial[1] + "," + Ttable[i][1];
                 
                 for(int j=0; j<_nb_symboles; j++) {
-                    nouvel_etat_initial[j] = nouvel_etat_initial[j] + "," + Ttable[i][j];
+                    nouvel_etat_initial[j+2] = nouvel_etat_initial[j+2] + "," + Ttable[i][j+2];
                 }
             }
-            
             if (Ttable[i][0] == "ES")
                 nouvel_etat_initial[0] = "ES";
         }
     }
 
     for (int i = 0; i<nouvel_etat_initial.size(); i++) {
-        
-        cout << nouvel_etat_initial[i] << endl;
+        cout << nouvel_etat_initial[i] << " ";
     }
 }
 

@@ -30,6 +30,8 @@ int main()
         AF.completion();
     }
     
+    AF.determination_et_completion();
+    
    
     
 }
