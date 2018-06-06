@@ -18,8 +18,8 @@ int main()
 	
 	cout << "Siaisr le numero du fichier : ";
 	cin >> Anumber;
-	chemin = "#" + Anumber + ".txt";
-	//chemin = "/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt";
+	//chemin = "#" + Anumber + ".txt";
+	chemin = "/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt";
 	
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;

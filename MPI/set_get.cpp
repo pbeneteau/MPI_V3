@@ -78,7 +78,11 @@ void 	Automate::afficher() {
 	cout << "Table de verite : " << endl;
 	
 	cout << endl;
-	
+	cout << "................. ";
+	for (int jsp=0; jsp<labelOrder.size(); jsp++)
+		cout << labelOrder[jsp] << " ..... ";
+	cout << endl;
+	cout << endl;
 	for (int i = 0; i < Ttable.size(); i++)
 	{
 		for (int j = 0; j < Ttable[i].size(); j++)
