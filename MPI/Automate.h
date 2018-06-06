@@ -40,6 +40,8 @@ class Automate
     
     void            fusion_etats_initiaux(vector<string> &nouvel_etat);
     void            fusion_etats(vector<vector<string>> &nouvel_automate, int n);
+	
+	void			standardiser_automate();
     /*
      **  GETTEURS & SETTEURS
      */
