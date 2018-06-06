@@ -42,6 +42,7 @@ class Automate
     void            fusion_etats(vector<vector<string>> &nouvel_automate, int n);
 	
 	void			standardiser_automate();
+	void			langage_compl();
     /*
      **  GETTEURS & SETTEURS
      */
