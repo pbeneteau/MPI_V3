@@ -9,8 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
-#include "FileReader.hpp"
-#include "Automate.h"
+#include "C7_Automate.h"
 
 using namespace std;
 

@@ -9,7 +9,7 @@
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
-#include "Automate.h"
+#include "C7_Automate.h"
 
 using namespace std;
 

@@ -1,13 +1,9 @@
 #include <iostream>
 #include <cstdlib>
-#include "Automate.h"
+#include "C7_Automate.h"
 
 using namespace std;
 
-/*
-/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt
-/Users/paulbeneteau/Documents/automates_copy/#05.txt
-*/
 int main()
 {
 	string chemin;
@@ -18,8 +14,7 @@ int main()
 	
 	cout << "Siaisr le numero du fichier : ";
 	cin >> Anumber;
-	//chemin = "#" + Anumber + ".txt";
-	chemin = "/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt";
+	chemin = "#" + Anumber + ".txt";
 	
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;

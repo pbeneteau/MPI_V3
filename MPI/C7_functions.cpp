@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include "Automate.h"
+#include "C7_Automate.h"
 
 void    Automate::set_nb_symboles(string ligne)
 {
@@ -21,20 +21,12 @@ void    Automate::set_etats_initiaux(string ligne)
 {
 	handle_ES(ligne, E);
 	_nb_etats_initiaux = atoi(E[0].c_str());
-	for (int i = 0; i < E.size(); i++)
-	{
-		cout << "oui" << E[i] << endl;
-	}
 }
 
 void    Automate::set_etats_terminaux(string ligne)
 {
 	handle_ES(ligne, S);
 	_nb_etats_terminaux = atoi(S[0].c_str());
-	for (int i = 0; i < S.size(); i++)
-	{
-		cout << "non" << S[i] << endl;
-	}
 }
 
 void	Automate::handle_ES(string ligne, vector<string> &EStab)
@@ -48,11 +40,7 @@ void	Automate::handle_ES(string ligne, vector<string> &EStab)
 		initialPos = pos + 1;
 		pos = ligne.find(" ", initialPos);
 	}
-	// Add the last one
-	//cout << "AL :" << ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1).size() << endl;
 	EStab.push_back(ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1));
-	//EStab.push_back(ligne.substr(initialPos, ligne.size() - initialPos - 1)); //OUI ?
-    
 }
 
 void 	Automate::afficher() {
