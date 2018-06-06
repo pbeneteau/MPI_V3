@@ -20,7 +20,7 @@ int main()
 	cout << "Lecture du fichier : OK !" << endl;
 	
 	AF.afficher();
-    
+  /*
     if (AF.est_un_automate_deterministe()) { cout << "Deterministe" << endl; } else {
         cout << "Non deterministe" << endl;
     }
@@ -30,7 +30,9 @@ int main()
     }
     
     AF.determination_et_completion();
-	 
-	/*AF.standardiser_automate();
-    AF.afficher();*/
+	*/
+//	AF.standardiser_automate();
+ //   AF.afficher();
+	AF.langage_compl();
+	AF.afficher();
 }
