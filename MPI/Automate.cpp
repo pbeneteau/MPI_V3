@@ -12,7 +12,7 @@ Automate::Automate() {
 bool Automate::est_un_automate_asynchrone() {
     
     vector<string> row; // Žtats
-        
+    
     for(int unsigned i=0; i<_nb_etats; i++) {
         row = Ttable[i];
         
@@ -109,19 +109,19 @@ void Automate::completion() {
 }
 
 /*
-vector<int> extractIntegerWords(string str)
-{
-    cout << "OUI3" << endl;
-    stringstream ss(str);
-    vector<int> etats;
-    
-    for(int i = 0; ss >> i;) {
-        etats.push_back(i);
-        cout << i << "|";
-    }
-    return etats;
-}
-*/
+ vector<int> extractIntegerWords(string str)
+ {
+ cout << "OUI3" << endl;
+ stringstream ss(str);
+ vector<int> etats;
+ 
+ for(int i = 0; ss >> i;) {
+ etats.push_back(i);
+ cout << i << "|";
+ }
+ return etats;
+ }
+ */
 void extractIntegerWords(string ligne, vector<string> &etats)
 {
     size_t pos = ligne.find(",");
@@ -161,34 +161,65 @@ void Automate::fusion_etats_initiaux(vector<string> &nouvel_etat) {
 }
 
 
+int Automate::trouver_index_etat(string etat) {
+        
+    for (int v = 0; v < Ttable.size(); v++) {
+        
+        if (Ttable[v][1] == etat) { // On cherche l'index v de l'Žtat
+            
+            return v;
+        }
+    }
+    return 404;
+}
+
+
+void afficher_etat(vector<string> etat) {
+    
+    cout << "Etat " << etat[1] << " : " << endl;
+    for (int i=0; i<etat.size(); i++) {
+        cout << etat[i] << " ";
+    }
+    
+    cout << "\n" << endl;
+}
 
 void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int n) {
     
     vector<string> etat_precedent = nouvel_automate[n];
     vector<string> nouvel_etat;
+    
     for (int i = 2; i<etat_precedent.size(); i++) { // On boucle dans les etats cible
         
-        vector<string> etats;
-
-        extractIntegerWords(etat_precedent[i], etats); // ex {2,3}
+        vector<string> etats; // etats a fusionner
         
-        for (int j=0; j<etats.size(); j++) { // boucle dans {2,3}
+        extractIntegerWords(etat_precedent[i], etats); // ex {2,5}
+        
+        for (int j=0; j<etats.size(); j++) { // boucle dans {2,5}
             
-            for (int v = 0; v < Ttable.size(); v++)
-            {
-                if (Ttable[v][1] == etats[j]) { // On cherche l'index v de l'Žtat
+            int index = trouver_index_etat(etats[j]);  // On cherche l'index v de l'Žtat
+            
+            if (nouvel_etat.empty()) {
+                nouvel_etat = Ttable[index];
+            } else {
+                for(int n=1; n<_nb_etats; n++) { // loop des symboles
+                    if (nouvel_etat[0] == "N/A") { nouvel_etat[0] = Ttable[index][0]; }
+                    if (Ttable[index][0] == "ES") { nouvel_etat[0] = Ttable[index][0]; }
                     
-                    if (nouvel_etat.empty()) {
-                        nouvel_etat = Ttable[v];
+                    cout << nouvel_etat[1] << " |||| " << Ttable[index][1] << endl;
+
+                    if (nouvel_etat[n] == "-" && Ttable[index][n] == "-") {
+                        nouvel_etat[n] = "-";
+                    } else if (nouvel_etat[n] == "-" && Ttable[index][n] != "-") {
+                        nouvel_etat[n] = Ttable[index][n];
+                    } else if (nouvel_etat[n] != "-" && Ttable[index][n] == "-") {
                     } else {
-                        for(int n=2; n<_nb_symboles; n++) { // loop des symboles
-                            string s = Ttable[v][n];
-                            nouvel_etat[n] = nouvel_etat[n] + "," + s;
-                        }
+                        nouvel_etat[n] = nouvel_etat[n] + "," + Ttable[index][n];
                     }
                 }
             }
         }
+        afficher_etat(nouvel_etat);
         nouvel_automate.push_back(nouvel_etat);
         nouvel_etat.clear();
     }
@@ -202,18 +233,16 @@ void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int n) {
 void Automate::determination_et_completion_automate_synchrone() {
     
     vector<vector<string>> nouvel_automate;
-    
-    vector<int> etats_initiaux;
-    
+        
     vector<string> nouvel_etat;
-
+    
     fusion_etats_initiaux(nouvel_etat);
     
     nouvel_automate.push_back(nouvel_etat); // ok
     
     int n=0;
     
-    while (n != 2) { // tant que determinisation possible
+    while (n != 1) { // tant que determinisation possible
         
         fusion_etats(nouvel_automate, n);
         n++;
