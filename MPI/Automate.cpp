@@ -150,7 +150,7 @@ void Automate::fusion_etats_initiaux(vector<string> &nouvel_etat) {
             } else {
                 nouvel_etat[1] = nouvel_etat[1] + "," + Ttable[i][1];
                 
-                for(int j=2; j<_nb_etats; j++) {
+                for(int j=2; j<_nb_symboles+2; j++) {
                     nouvel_etat[j] = nouvel_etat[j] + "," + Ttable[i][j];
                 }
             }
@@ -184,9 +184,9 @@ void afficher_etat(vector<string> etat) {
     cout << "\n" << endl;
 }
 
-void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int n) {
+void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int k) {
     
-    vector<string> etat_precedent = nouvel_automate[n];
+    vector<string> etat_precedent = nouvel_automate[k];
     vector<string> nouvel_etat;
     
     for (int i = 2; i<etat_precedent.size(); i++) { // On boucle dans les etats cible
@@ -202,12 +202,10 @@ void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int n) {
             if (nouvel_etat.empty()) {
                 nouvel_etat = Ttable[index];
             } else {
-                for(int n=1; n<_nb_etats; n++) { // loop des symboles
+                for(int n=1; n<_nb_symboles+2; n++) { // loop des symboles
                     if (nouvel_etat[0] == "N/A") { nouvel_etat[0] = Ttable[index][0]; }
                     if (Ttable[index][0] == "ES") { nouvel_etat[0] = Ttable[index][0]; }
                     
-                    cout << nouvel_etat[1] << " |||| " << Ttable[index][1] << endl;
-
                     if (nouvel_etat[n] == "-" && Ttable[index][n] == "-") {
                         nouvel_etat[n] = "-";
                     } else if (nouvel_etat[n] == "-" && Ttable[index][n] != "-") {

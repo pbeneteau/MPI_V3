@@ -20,7 +20,7 @@ void	Automate::standardiser_automate()
 	
 	for (int i=0; i<Ttable.size(); i++)
 	{
-		if (Ttable[i][0] == "E" || Ttable[i][0] == "ES")
+		if ((Ttable[i][0] == "E" || Ttable[i][0] == "ES") && Ttable[i][1] != "i")
 		{
 			if (Ttable[i][0] == "E")
 				Ttable[i][0] = "N/A";
@@ -30,7 +30,24 @@ void	Automate::standardiser_automate()
 			}
 			
 			Ei = Ttable[i];
+			if (isS == true)
+				Ei[0] = "ES";
+			else
+				Ei[0] = "E";
+			Ei[1] = "i";
 			
+			if (Ttable.back()[1] == "i")
+			{
+				Ttable.back()[0] = Ei[0];
+				for (int j=2; j<Ei.size(); j++) {
+					if (Ttable.back()[j] == "-")
+						Ttable.back()[j] = Ei[j];
+					else
+						Ttable.back()[j] += "," + Ei[j];
+				}
+			}
+			else
+				Ttable.push_back(Ei);
 		}
 	}
 }

@@ -13,13 +13,12 @@ int main()
 	Automate    AF;
 	
 	cout << "Siaisr le numero du fichier : ";
-	chemin = "/Users/paulbeneteau/Documents/automates_copy/#05.txt";
+	chemin = "/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#05.txt";
 
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;
 	
 	AF.afficher();
-    
     
     if (AF.est_un_automate_deterministe()) { cout << "Deterministe" << endl; } else {
         cout << "Non deterministe" << endl;
@@ -30,7 +29,7 @@ int main()
     }
     
     AF.determination_et_completion();
-    
-   
-    
+	 
+	/*AF.standardiser_automate();
+    AF.afficher();*/
 }
