@@ -60,6 +60,7 @@ class Automate
 	void			handle_initiaux(string ligne);
 	void			handle_terminaux(string ligne);
     string          handle_comma(string &line);
+    int             trouver_index_etat(string etat);
 	
 };
 
