@@ -88,7 +88,7 @@ void    Automate::lecture_fichier(string chemin)
 		cout << "0 transitions dans le file" << endl;
 		exit(1);
 	}
-
+	//Creation de la table de transition
 	while (getline(file, line))
 	{
 		set_Ttable(line);

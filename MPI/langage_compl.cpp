@@ -16,9 +16,9 @@ using namespace std;
 
 void	Automate::langage_compl()
 {
-	completion();
+	completion(); //On commence par completer
 	
-	for (int i=0; i<Ttable.size(); i++)
+	for (int i=0; i<Ttable.size(); i++) //A travers la table de transition on inverse les etats terminaux et non T
 	{
 		if (Ttable[i][0] == "S")
 			Ttable[i][0] = "N/A";

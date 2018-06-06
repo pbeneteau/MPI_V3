@@ -18,10 +18,11 @@ void	Automate::standardiser_automate()
 	vector<string> Ei;
 	bool isS = false;
 	
-	for (int i=0; i<Ttable.size(); i++)
+	for (int i=0; i<Ttable.size(); i++) //On lit la table de transition
 	{
-		if ((Ttable[i][0] == "E" || Ttable[i][0] == "ES") && Ttable[i][1] != "i")
+		if ((Ttable[i][0] == "E" || Ttable[i][0] == "ES") && Ttable[i][1] != "i") //Si on est sur une entrée
 		{
+			//On modifie pour que ce ne soit plus une entree
 			if (Ttable[i][0] == "E")
 				Ttable[i][0] = "N/A";
 			else if (Ttable[i][0] == "ES") {
@@ -36,6 +37,7 @@ void	Automate::standardiser_automate()
 				Ei[0] = "E";
 			Ei[1] = "i";
 			
+			//On crée et ajoute le nouvel état i
 			if (Ttable.back()[1] == "i")
 			{
 				Ttable.back()[0] = Ei[0];
