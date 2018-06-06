@@ -52,7 +52,7 @@ void	Automate::handle_ES(string ligne, vector<string> &EStab)
 	//cout << "AL :" << ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1).size() << endl;
 	EStab.push_back(ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1));
 	//EStab.push_back(ligne.substr(initialPos, ligne.size() - initialPos - 1)); //OUI ?
-
+    
 }
 
 void 	Automate::afficher() {

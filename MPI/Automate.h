@@ -4,7 +4,8 @@
 using namespace std;
 #include <string>
 #include <vector>
-
+#include <algorithm>
+#include <sstream>
 
 class Automate
 {
@@ -37,7 +38,8 @@ class Automate
     void            determination_et_completion_automate_asynchrone();
 	void            determination_et_completion_automate_synchrone();
     
-    
+    void            fusion_etats_initiaux(vector<string> &nouvel_etat);
+    void            fusion_etats(vector<vector<string>> &nouvel_automate, int n);
     /*
      **  GETTEURS & SETTEURS
      */
@@ -57,6 +59,7 @@ class Automate
 	
 	void			handle_initiaux(string ligne);
 	void			handle_terminaux(string ligne);
+    string          handle_comma(string &line);
 	
 };
 

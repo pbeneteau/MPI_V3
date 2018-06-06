@@ -13,7 +13,7 @@ int main()
 	Automate    AF;
 	
 	cout << "Siaisr le numero du fichier : ";
-	cin >> chemin;
+	chemin = "/Users/paulbeneteau/Documents/automates_copy/#05.txt";
 
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;
@@ -27,7 +27,6 @@ int main()
     if (AF.est_un_automate_asynchrone()) { cout << "Asynchrone" << endl; } else { cout << "Synchrone" << endl; }
     if (AF.est_un_automate_complet()) { cout << "Complet" << endl; } else {
         cout << "Non complet" << endl;
-        AF.completion();
     }
     
     AF.determination_et_completion();

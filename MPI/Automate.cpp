@@ -108,7 +108,96 @@ void Automate::completion() {
     Ttable.push_back(row_P);
 }
 
+/*
+vector<int> extractIntegerWords(string str)
+{
+    cout << "OUI3" << endl;
+    stringstream ss(str);
+    vector<int> etats;
+    
+    for(int i = 0; ss >> i;) {
+        etats.push_back(i);
+        cout << i << "|";
+    }
+    return etats;
+}
+*/
+void extractIntegerWords(string ligne, vector<string> &etats)
+{
+    size_t pos = ligne.find(",");
+    size_t initialPos = 0;
+    
+    // Decompose statement
+    while(pos != string::npos) {
+        etats.push_back(ligne.substr(initialPos, pos - initialPos));
+        initialPos = pos + 1;
+        pos = ligne.find(" ", initialPos);
+    }
+    // Add the last one
+    //cout << "AL :" << ligne.substr(initialPos, min(pos, ligne.size()) - initialPos - 1).size() << endl;
+    etats.push_back(ligne.substr(initialPos, min(pos, ligne.size()) - initialPos + 1));
+    //EStab.push_back(ligne.substr(initialPos, ligne.size() - initialPos - 1)); //OUI ?
+}
 
+void Automate::fusion_etats_initiaux(vector<string> &nouvel_etat) {
+    
+    for (int i=0; i<_nb_etats; i++) {
+        
+        if (Ttable[i][0] == "ES" || Ttable[i][0] == "E") {
+            
+            if (nouvel_etat.empty()) {
+                nouvel_etat = Ttable[i];
+            } else {
+                nouvel_etat[1] = nouvel_etat[1] + "," + Ttable[i][1];
+                
+                for(int j=2; j<_nb_etats; j++) {
+                    nouvel_etat[j] = nouvel_etat[j] + "," + Ttable[i][j];
+                }
+            }
+            if (Ttable[i][0] == "ES")
+                nouvel_etat[0] = "ES";
+        }
+    }
+}
+
+
+
+void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int n) {
+    
+    vector<string> etat_precedent = nouvel_automate[n];
+    vector<string> nouvel_etat;
+    for (int i = 2; i<etat_precedent.size(); i++) { // On boucle dans les etats cible
+        
+        vector<string> etats;
+
+        extractIntegerWords(etat_precedent[i], etats); // ex {2,3}
+        
+        for (int j=0; j<etats.size(); j++) { // boucle dans {2,3}
+            
+            for (int v = 0; v < Ttable.size(); v++)
+            {
+                if (Ttable[v][1] == etats[j]) { // On cherche l'index v de l'Žtat
+                    
+                    if (nouvel_etat.empty()) {
+                        nouvel_etat = Ttable[v];
+                    } else {
+                        for(int n=2; n<_nb_symboles; n++) { // loop des symboles
+                            string s = Ttable[v][n];
+                            nouvel_etat[n] = nouvel_etat[n] + "," + s;
+                        }
+                    }
+                }
+            }
+        }
+        nouvel_automate.push_back(nouvel_etat);
+        nouvel_etat.clear();
+    }
+}
+
+
+
+
+//Users/paulbeneteau/Documents/automates_copy/#05.txt
 
 void Automate::determination_et_completion_automate_synchrone() {
     
@@ -116,29 +205,28 @@ void Automate::determination_et_completion_automate_synchrone() {
     
     vector<int> etats_initiaux;
     
-    vector<string> nouvel_etat_initial;
+    vector<string> nouvel_etat;
 
+    fusion_etats_initiaux(nouvel_etat);
     
-    for (int i=0; i<_nb_etats; i++) {
+    nouvel_automate.push_back(nouvel_etat); // ok
+    
+    int n=0;
+    
+    while (n != 2) { // tant que determinisation possible
         
-        if (Ttable[i][0] == "ES" || Ttable[i][0] == "E") {
-
-            if (nouvel_etat_initial.empty()) {
-                nouvel_etat_initial = Ttable[i];
-            } else {
-                nouvel_etat_initial[1] = nouvel_etat_initial[1] + "," + Ttable[i][1];
-                
-                for(int j=0; j<_nb_symboles; j++) {
-                    nouvel_etat_initial[j+2] = nouvel_etat_initial[j+2] + "," + Ttable[i][j+2];
-                }
-            }
-            if (Ttable[i][0] == "ES")
-                nouvel_etat_initial[0] = "ES";
-        }
+        fusion_etats(nouvel_automate, n);
+        n++;
     }
-
-    for (int i = 0; i<nouvel_etat_initial.size(); i++) {
-        cout << nouvel_etat_initial[i] << " ";
+    
+    
+    
+    // print nouvel automate
+    for (int i=0; i<nouvel_automate.size(); i++) {
+        for (int j=0; j<nouvel_automate[0].size(); j++) {
+            cout << nouvel_automate[i][j] << " ";
+        }
+        cout << endl;
     }
 }
 
