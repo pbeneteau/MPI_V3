@@ -26,7 +26,6 @@ bool Automate::est_un_automate_asynchrone() {
     return false;
 }
 
-
 bool Automate::est_un_automate_deterministe()
 {
     
@@ -51,7 +50,6 @@ bool Automate::est_un_automate_deterministe()
     }
     return true;
 }
-
 
 bool Automate::est_un_automate_complet()
 {
@@ -78,7 +76,6 @@ bool Automate::est_un_automate_complet()
     }
     return false;
 }
-
 
 void Automate::completion() {
     
@@ -108,20 +105,6 @@ void Automate::completion() {
     Ttable.push_back(row_P);
 }
 
-/*
- vector<int> extractIntegerWords(string str)
- {
- cout << "OUI3" << endl;
- stringstream ss(str);
- vector<int> etats;
- 
- for(int i = 0; ss >> i;) {
- etats.push_back(i);
- cout << i << "|";
- }
- return etats;
- }
- */
 void extractIntegerWords(string ligne, vector<string> &etats)
 {
     size_t pos = ligne.find(",");
@@ -162,7 +145,7 @@ void Automate::fusion_etats_initiaux(vector<string> &nouvel_etat) {
 
 
 int Automate::trouver_index_etat(string etat) {
-        
+    
     for (int v = 0; v < Ttable.size(); v++) {
         
         if (Ttable[v][1] == etat) { // On cherche l'index v de l'Žtat
@@ -184,7 +167,23 @@ void afficher_etat(vector<string> etat) {
     cout << "\n" << endl;
 }
 
-void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int k) {
+bool Automate::etat_est_connu(string etat, vector<vector<string>> nouvel_automate) {
+    
+    sort(etat.begin(), etat.end());
+    
+    for (int i=0; i<nouvel_automate.size(); i++) {
+        
+        sort(nouvel_automate[i][1].begin(), nouvel_automate[i][1].end());
+        
+        if (etat == nouvel_automate[i][1]) {
+            
+            return true;
+        }
+    }
+    return false;
+}
+
+void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int &k) {
     
     vector<string> etat_precedent = nouvel_automate[k];
     vector<string> nouvel_etat;
@@ -195,65 +194,66 @@ void Automate::fusion_etats(vector<vector<string>> &nouvel_automate, int k) {
         
         extractIntegerWords(etat_precedent[i], etats); // ex {2,5}
         
-        for (int j=0; j<etats.size(); j++) { // boucle dans {2,5}
-            
-            int index = trouver_index_etat(etats[j]);  // On cherche l'index v de l'Žtat
-            
-            if (nouvel_etat.empty()) {
-                nouvel_etat = Ttable[index];
-            } else {
-                for(int n=1; n<_nb_symboles+2; n++) { // loop des symboles
-                    if (nouvel_etat[0] == "N/A") { nouvel_etat[0] = Ttable[index][0]; }
-                    if (Ttable[index][0] == "ES") { nouvel_etat[0] = Ttable[index][0]; }
-                    
-                    if (nouvel_etat[n] == "-" && Ttable[index][n] == "-") {
-                        nouvel_etat[n] = "-";
-                    } else if (nouvel_etat[n] == "-" && Ttable[index][n] != "-") {
-                        nouvel_etat[n] = Ttable[index][n];
-                    } else if (nouvel_etat[n] != "-" && Ttable[index][n] == "-") {
-                    } else {
-                        nouvel_etat[n] = nouvel_etat[n] + "," + Ttable[index][n];
+        if (etat_est_connu(etat_precedent[i], nouvel_automate) == false) {
+
+            for (int j=0; j<etats.size(); j++) { // boucle dans {2,5}
+                
+                int index = trouver_index_etat(etats[j]);  // On cherche l'index v de l'Žtat
+                
+                if (nouvel_etat.empty()) {
+                    nouvel_etat = Ttable[index];
+                } else {
+                    for(int n=1; n<_nb_symboles+2; n++) { // loop des symboles
+                        if (nouvel_etat[0] == "N/A") { nouvel_etat[0] = Ttable[index][0]; }
+                        if (Ttable[index][0] == "ES") { nouvel_etat[0] = Ttable[index][0]; }
+                        
+                        if (nouvel_etat[n] == "-" && Ttable[index][n] == "-") {
+                            nouvel_etat[n] = "-";
+                        } else if (nouvel_etat[n] == "-" && Ttable[index][n] != "-") {
+                            nouvel_etat[n] = Ttable[index][n];
+                        } else if (nouvel_etat[n] != "-" && Ttable[index][n] == "-") {
+                        } else {
+                            nouvel_etat[n] = nouvel_etat[n] + "," + Ttable[index][n];
+                        }
                     }
                 }
             }
+
+            afficher_etat(nouvel_etat);
+            nouvel_automate.push_back(nouvel_etat);
+            nouvel_etat.clear();
         }
-        afficher_etat(nouvel_etat);
-        nouvel_automate.push_back(nouvel_etat);
-        nouvel_etat.clear();
+        k++;
     }
 }
-
-
-
-
-//Users/paulbeneteau/Documents/automates_copy/#05.txt
 
 void Automate::determination_et_completion_automate_synchrone() {
     
     vector<vector<string>> nouvel_automate;
-        
+    
     vector<string> nouvel_etat;
     
     fusion_etats_initiaux(nouvel_etat);
     
     nouvel_automate.push_back(nouvel_etat); // ok
     
-    int n=0;
+    int k = 0;
     
-    while (n != 1) { // tant que determinisation possible
+    while (k != nouvel_automate.size()) { // tant que determinisation possible
         
-        fusion_etats(nouvel_automate, n);
-        n++;
+        cout << (k) << " vs " << nouvel_automate.size() << endl;
+        
+        fusion_etats(nouvel_automate, k);
+        
+        for(int k=0; k<nouvel_automate.size(); k++) {
+            afficher_etat(nouvel_automate[k]);
+        }
     }
     
+    Ttable = nouvel_automate;
     
-    
-    // print nouvel automate
-    for (int i=0; i<nouvel_automate.size(); i++) {
-        for (int j=0; j<nouvel_automate[0].size(); j++) {
-            cout << nouvel_automate[i][j] << " ";
-        }
-        cout << endl;
+    if (!est_un_automate_complet()) {
+        completion();
     }
 }
 

@@ -6,6 +6,7 @@ using namespace std;
 
 /*
 /Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#03.txt
+/Users/paulbeneteau/Documents/automates_copy/#05.txt
 */
 int main()
 {
@@ -13,7 +14,7 @@ int main()
 	Automate    AF;
 	
 	cout << "Siaisr le numero du fichier : ";
-	chemin = "/Users/maxence/Documents/Prog/EFREI/MPI/MPI/MPI/automates/#05.txt";
+	chemin = "/Users/paulbeneteau/Documents/automates_copy/#05.txt";
 
 	AF.lecture_fichier(chemin);
 	cout << "Lecture du fichier : OK !" << endl;

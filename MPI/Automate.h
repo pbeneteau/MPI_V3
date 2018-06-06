@@ -39,7 +39,7 @@ class Automate
 	void            determination_et_completion_automate_synchrone();
     
     void            fusion_etats_initiaux(vector<string> &nouvel_etat);
-    void            fusion_etats(vector<vector<string>> &nouvel_automate, int n);
+    void            fusion_etats(vector<vector<string>> &nouvel_automate, int &k);
 	
 	void			standardiser_automate();
     /*
@@ -63,6 +63,7 @@ class Automate
 	void			handle_terminaux(string ligne);
     string          handle_comma(string &line);
     int             trouver_index_etat(string etat);
+    bool            etat_est_connu(string etat, vector<vector<string>> nouvel_automate);
 	
 };
 
